@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>e.lys | Official Website</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: #292929;
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.9;
+    }
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      animation: hideIntro .8s ease 1.8s forwards;
+    }
+    .logo {
+      font-size: 38px;
+      letter-spacing: .2em;
+      animation: fadeIn 1s ease both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hideIntro {
+      to { opacity: 0; visibility: hidden; }
+    }
+    header {
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+    }
+    nav { display: flex; gap: 16px; font-size: 12px; }
+    a { color: inherit; text-decoration: none; }
+    .hero {
+      min-height: 78svh;
+      padding: 90px 8%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(135deg, #fff 60%, #f3f2ee);
+    }
+    .eyebrow { color: #888; font-size: 11px; letter-spacing: .2em; }
+    h1 { font-size: clamp(34px, 7vw, 68px); font-weight: 400; line-height: 1.5; }
+    p { color: #777; max-width: 600px; }
+    section { padding: 80px 8%; }
+    .content { max-width: 760px; margin: auto; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .8s, transform .8s;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .service { border-top: 1px solid #eee; padding: 20px 0; }
+    footer { padding: 25px 8%; border-top: 1px solid #eee; color: #888; font-size: 11px; }
+    @media (max-width: 600px) {
+      header { padding: 18px 5%; }
+      nav { gap: 10px; font-size: 10px; }
+      section { padding: 60px 7%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .intro { animation-duration: .01ms; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro"><div class="logo">e.lys</div></div>
+  <header>
+    <a href="#">e.lys</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#service">Service</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <div class="hero">
+      <span class="eyebrow">WELCOME TO E.LYS</span>
+      <h1 class="reveal">日常に、<br>新しい価値を。</h1>
+      <p class="reveal">私たちの想いやサービスを、ここからお届けします。</p>
+    </div>
+    <section id="about">
+      <div class="content reveal">
+        <span class="eyebrow">01 — ABOUT</span>
+        <h2>私たちについて</h2>
+        <p>ここにブランドや会社の紹介文を掲載します。</p>
+      </div>
+    </section>
+    <section id="service">
+      <div class="content reveal">
+        <span class="eyebrow">02 — SERVICE</span>
+        <h2>サービス</h2>
+        <div class="service"><h3>Service 01</h3><p>サービスの内容を紹介します。</p></div>
+        <div class="service"><h3>Service 02</h3><p>サービスの特徴を紹介します。</p></div>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="content reveal">
+        <span class="eyebrow">03 — CONTACT</span>
+        <h2>お問い合わせ</h2>
+        <p>こちらにお問い合わせ先を掲載します。</p>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 e.lys. All rights reserved.</footer>
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
